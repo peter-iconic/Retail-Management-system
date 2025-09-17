@@ -63,3 +63,8 @@ button {
 button:hover {
   background: #8e24aa;
 }
+.container {
+  width: 100%;
+  height: 500px;
+  background-image: url(assets\photos\BACK.jpg);
+}

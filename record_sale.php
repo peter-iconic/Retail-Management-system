@@ -43,7 +43,7 @@ if (isset($_POST['submit'])) {
     $stmt->bind_param("di", $total, $sale_id);
     $stmt->execute();
 
-    echo "<p class='success'>Sale recorded successfully! Total: $" . number_format($total, 2) . "</p>";
+    echo "<p class='success'>Sale recorded successfully! Total: K" . number_format($total, 2) . "</p>";
 }
 
 // Fetch products
@@ -125,7 +125,7 @@ $result = $conn->query("SELECT * FROM Products");
             <label>Products:</label>
             <?php while ($row = $result->fetch_assoc()): ?>
                 <div class="product-row">
-                    <span><?= htmlspecialchars($row['name']) ?> ($<?= number_format($row['price'], 2) ?>)</span>
+                    <span><?= htmlspecialchars($row['name']) ?> (K<?= number_format($row['price'], 2) ?>)</span>
                     <input type="number" name="products[<?= $row['product_id'] ?>]" min="0" value="0">
                 </div>
             <?php endwhile; ?>

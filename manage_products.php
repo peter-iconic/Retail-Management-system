@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/auth.php';
-require_role('admin'); // Only admin can manage products
+//require_role('admin'); // Only admin can manage products
 require_once __DIR__ . '/db.php';
 
 // Delete product
@@ -93,7 +93,7 @@ $result = $conn->query("SELECT * FROM Products");
     <h2>Products</h2>
     <div class="top-actions">
       <a href="add_product.php">Add New Product</a>
-      <a href="dashboard.php">Back to Dashboard</a>
+      <a href="index.php">Back to Dashboard</a>
     </div>
 
     <table>
