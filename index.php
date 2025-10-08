@@ -212,8 +212,8 @@ $new_orders = $result->fetch_assoc()['new_orders'];
 
   <header>
     <div class="logo">
-      <div class="logo-img">RS</div>
-      <h1>Retail System</h1>
+      <div class="logo-img">SR</div>
+      <h1>Shoprite</h1>
     </div>
     <span class="user-welcome">Welcome, Admin User</span>
   </header>
