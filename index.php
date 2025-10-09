@@ -1,5 +1,11 @@
 <?php
+session_start();
 include 'db.php';
+// 🔒 Redirect to login if not logged in
+if (!isset($_SESSION['user'])) {
+  header("Location: login.php");
+  exit;
+}
 
 // --- Products count ---
 $result = $conn->query("SELECT COUNT(*) AS total_products FROM Products");
@@ -222,8 +228,14 @@ $new_orders = $result->fetch_assoc()['new_orders'];
     <a href="manage_products.php">Manage Products</a>
     <a href="record_sale.php">Record Sales</a>
     <a href="reports.php">Reports</a>
-    <a href="logout.php">Logout</a>
+
+    <?php if (isset($_SESSION['user'])): ?>
+      <a href="logout.php">Logout</a>
+    <?php else: ?>
+      <a href="login.php">Login</a>
+    <?php endif; ?>
   </nav>
+
 
   <div class="container">
     <div class="dashboard-card">
