@@ -6,6 +6,25 @@ if (!isset($_SESSION['user'])) {
   header("Location: login.php");
   exit;
 }
+// Get user information from database if user is logged in
+$user_name = "Guest"; // Default value
+$full_name = "Guest";
+
+if (isset($_SESSION['user'])) {
+  $username = $_SESSION['user'];
+  $stmt = $conn->prepare("SELECT full_name FROM Users WHERE username = ?");
+  $stmt->bind_param("s", $username);
+  $stmt->execute();
+  $result = $stmt->get_result();
+
+  if ($result->num_rows > 0) {
+    $user_data = $result->fetch_assoc();
+    $full_name = $user_data['full_name'];
+    $user_name = $full_name ?: $username; // Use full name if available, otherwise username
+  } else {
+    $user_name = $username;
+  }
+}
 
 // --- Products count ---
 $result = $conn->query("SELECT COUNT(*) AS total_products FROM Products");
@@ -77,15 +96,9 @@ $new_orders = $result->fetch_assoc()['new_orders'];
 
     .logo-img {
       height: 50px;
-      width: 50px;
-      background: #2a5298;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: bold;
-      font-size: 20px;
+      width: auto;
+      max-width: 150px;
+      object-fit: contain;
     }
 
     .user-welcome {
@@ -218,10 +231,10 @@ $new_orders = $result->fetch_assoc()['new_orders'];
 
   <header>
     <div class="logo">
-      <div class="logo-img">SR</div>
-      <h1>Shoprite</h1>
+      <img src="assets\photos\web based database  october 2025.png 1.png" alt="COCO STORE Logo" class="logo-img">
+      <h1>COCO STORE</h1>
     </div>
-    <span class="user-welcome">Welcome, Admin User</span>
+    <span class="user-welcome">Welcome, <?php echo htmlspecialchars($user_name); ?></span>
   </header>
 
   <nav>
